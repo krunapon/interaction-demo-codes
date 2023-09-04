@@ -1,0 +1,14 @@
+#Write a program which prompts the user for 10 floating-point numbers
+# and calculates their sum, product and average.
+# Your program should only contain a single loop.
+MAX_TIMES = 10
+sum = 0.0
+product = 1.0
+average = 0.0
+for i in range(1, MAX_TIMES + 1):
+    number = float(input("Enter a floating-point number %d:" % i))
+    sum = sum + number
+    product = product * number
+average = sum/MAX_TIMES
+print("Sum is %g, product is %g, and average is %g" % (sum, product, average))
+

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <title>bagels.py</title>
+  <link rel="stylesheet" href="../pycco.css">
+</head>
+<body>
+<div id='container'>
+  <div id="background"></div>
+  <div class='section'>
+    <div class='docs'><h1>bagels.py</h1></div>
+  </div>
+  <div class='clearall'>
+  <div class='section' id='section-0'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-0'>#</a>
+      </div>
+      <p>Bagels, a number puzzle game.</p>
+<p>Exercises:</p>
+<ol>
+<li>Can you guess the number?</li>
+<li>How much harder is 6 digits? Do you need more guesses?</li>
+<li>What&rsquo;s the maximum number of digits we could support?</li>
+</ol>
+<p>Adapted from code in https://inventwithpython.com/chapter11.html</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">sample</span><span class="p">,</span> <span class="n">shuffle</span>
+
+<span class="n">digits</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">guesses</span> <span class="o">=</span> <span class="mi">10</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;I am thinking of a&#39;</span><span class="p">,</span> <span class="n">digits</span><span class="p">,</span> <span class="s1">&#39;digit number.&#39;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Try to guess what it is.&#39;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Here are some clues:&#39;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;When I say:    That means:&#39;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;  pico         One digit is correct but in the wrong position.&#39;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;  fermi        One digit is correct and in the right position.&#39;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;  bagels       No digit is correct.&#39;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;There are no repeated digits in the number.&#39;</span><span class="p">)</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-1'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-1'>#</a>
+      </div>
+      <p>Create a random number.</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre><span class="n">letters</span> <span class="o">=</span> <span class="n">sample</span><span class="p">(</span><span class="s1">&#39;0123456789&#39;</span><span class="p">,</span> <span class="n">digits</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">letters</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;0&#39;</span><span class="p">:</span>
+    <span class="n">letters</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
+
+<span class="n">number</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">letters</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;I have thought up a number.&#39;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;You have&#39;</span><span class="p">,</span> <span class="n">guesses</span><span class="p">,</span> <span class="s1">&#39;guesses to get it.&#39;</span><span class="p">)</span>
+
+<span class="n">counter</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Guess #&#39;</span><span class="p">,</span> <span class="n">counter</span><span class="p">)</span>
+    <span class="n">guess</span> <span class="o">=</span> <span class="nb">input</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">guess</span><span class="p">)</span> <span class="o">!=</span> <span class="n">digits</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Wrong number of digits. Try again!&#39;</span><span class="p">)</span>
+        <span class="k">continue</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-2'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-2'>#</a>
+      </div>
+      <p>Create the clues.</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="n">clues</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">digits</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">guess</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">==</span> <span class="n">number</span><span class="p">[</span><span class="n">index</span><span class="p">]:</span>
+            <span class="n">clues</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;fermi&#39;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">guess</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="ow">in</span> <span class="n">number</span><span class="p">:</span>
+            <span class="n">clues</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;pico&#39;</span><span class="p">)</span>
+
+    <span class="n">shuffle</span><span class="p">(</span><span class="n">clues</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">clues</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;bagels&#39;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">clues</span><span class="p">))</span>
+
+    <span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="k">if</span> <span class="n">guess</span> <span class="o">==</span> <span class="n">number</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;You got it!&#39;</span><span class="p">)</span>
+        <span class="k">break</span>
+
+    <span class="k">if</span> <span class="n">counter</span> <span class="o">&gt;</span> <span class="n">guesses</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;You ran out of guesses. The answer was&#39;</span><span class="p">,</span> <span class="n">number</span><span class="p">)</span>
+        <span class="k">break</span>
+
+</pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+</div>
+</body>

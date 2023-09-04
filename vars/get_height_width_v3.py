@@ -1,0 +1,11 @@
+correct_input = False # this is a boolean value -- it can be either true or false.
+
+while not correct_input: # this is a while loop
+    try:
+        height = int(input("Enter height of rectangle: "))
+        width = int(input("Enter width of rectangle: "))
+        print("The area of the rectangle is %d " % (height * width))
+    except ValueError:
+        print("Please enter valid integers for the height and width.")
+    else: # this will be executed if there is no value error
+        correct_input = True

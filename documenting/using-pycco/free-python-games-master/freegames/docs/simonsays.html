@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <title>simonsays.py</title>
+  <link rel="stylesheet" href="pycco.css">
+</head>
+<body>
+<div id='container'>
+  <div id="background"></div>
+  <div class='section'>
+    <div class='docs'><h1>simonsays.py</h1></div>
+  </div>
+  <div class='clearall'>
+  <div class='section' id='section-0'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-0'>#</a>
+      </div>
+      <p>Simon Says</p>
+<p>Exercises</p>
+<ol>
+<li>Speed up tile flash rate.</li>
+<li>Add more tiles.</li>
+</ol>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">choice</span>
+<span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">sleep</span>
+<span class="kn">from</span> <span class="nn">turtle</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">freegames</span> <span class="kn">import</span> <span class="n">floor</span><span class="p">,</span> <span class="n">square</span><span class="p">,</span> <span class="n">vector</span>
+
+<span class="n">pattern</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">guesses</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">tiles</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="n">vector</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">):</span> <span class="p">(</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="s1">&#39;dark red&#39;</span><span class="p">),</span>
+    <span class="n">vector</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">200</span><span class="p">):</span> <span class="p">(</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="s1">&#39;dark blue&#39;</span><span class="p">),</span>
+    <span class="n">vector</span><span class="p">(</span><span class="o">-</span><span class="mi">200</span><span class="p">,</span> <span class="mi">0</span><span class="p">):</span> <span class="p">(</span><span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="s1">&#39;dark green&#39;</span><span class="p">),</span>
+    <span class="n">vector</span><span class="p">(</span><span class="o">-</span><span class="mi">200</span><span class="p">,</span> <span class="o">-</span><span class="mi">200</span><span class="p">):</span> <span class="p">(</span><span class="s1">&#39;yellow&#39;</span><span class="p">,</span> <span class="s1">&#39;khaki&#39;</span><span class="p">),</span>
+<span class="p">}</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-1'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-1'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre><span class="k">def</span> <span class="nf">grid</span><span class="p">():</span>
+    <span class="s2">&quot;Draw grid of tiles.&quot;</span>
+    <span class="n">square</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="s1">&#39;dark red&#39;</span><span class="p">)</span>
+    <span class="n">square</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">200</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="s1">&#39;dark blue&#39;</span><span class="p">)</span>
+    <span class="n">square</span><span class="p">(</span><span class="o">-</span><span class="mi">200</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="s1">&#39;dark green&#39;</span><span class="p">)</span>
+    <span class="n">square</span><span class="p">(</span><span class="o">-</span><span class="mi">200</span><span class="p">,</span> <span class="o">-</span><span class="mi">200</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="s1">&#39;khaki&#39;</span><span class="p">)</span>
+    <span class="n">update</span><span class="p">()</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-2'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-2'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre><span class="k">def</span> <span class="nf">flash</span><span class="p">(</span><span class="n">tile</span><span class="p">):</span>
+    <span class="s2">&quot;Flash tile in grid.&quot;</span>
+    <span class="n">glow</span><span class="p">,</span> <span class="n">dark</span> <span class="o">=</span> <span class="n">tiles</span><span class="p">[</span><span class="n">tile</span><span class="p">]</span>
+    <span class="n">square</span><span class="p">(</span><span class="n">tile</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">tile</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="n">glow</span><span class="p">)</span>
+    <span class="n">update</span><span class="p">()</span>
+    <span class="n">sleep</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+    <span class="n">square</span><span class="p">(</span><span class="n">tile</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">tile</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="n">dark</span><span class="p">)</span>
+    <span class="n">update</span><span class="p">()</span>
+    <span class="n">sleep</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-3'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-3'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre><span class="k">def</span> <span class="nf">grow</span><span class="p">():</span>
+    <span class="s2">&quot;Grow pattern and flash tiles.&quot;</span>
+    <span class="n">tile</span> <span class="o">=</span> <span class="n">choice</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">tiles</span><span class="p">))</span>
+    <span class="n">pattern</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tile</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">tile</span> <span class="ow">in</span> <span class="n">pattern</span><span class="p">:</span>
+        <span class="n">flash</span><span class="p">(</span><span class="n">tile</span><span class="p">)</span>
+
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Pattern length:&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">pattern</span><span class="p">))</span>
+    <span class="n">guesses</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-4'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-4'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre><span class="k">def</span> <span class="nf">tap</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="s2">&quot;Respond to screen tap.&quot;</span>
+    <span class="n">onscreenclick</span><span class="p">(</span><span class="bp">None</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">floor</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">floor</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+    <span class="n">tile</span> <span class="o">=</span> <span class="n">vector</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+    <span class="n">index</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">guesses</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">tile</span> <span class="o">!=</span> <span class="n">pattern</span><span class="p">[</span><span class="n">index</span><span class="p">]:</span>
+        <span class="nb">exit</span><span class="p">()</span>
+
+    <span class="n">guesses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tile</span><span class="p">)</span>
+    <span class="n">flash</span><span class="p">(</span><span class="n">tile</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">guesses</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">pattern</span><span class="p">):</span>
+        <span class="n">grow</span><span class="p">()</span>
+
+    <span class="n">onscreenclick</span><span class="p">(</span><span class="n">tap</span><span class="p">)</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-5'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-5'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre><span class="k">def</span> <span class="nf">start</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="s2">&quot;Start game.&quot;</span>
+    <span class="n">grow</span><span class="p">()</span>
+    <span class="n">onscreenclick</span><span class="p">(</span><span class="n">tap</span><span class="p">)</span>
+
+<span class="n">setup</span><span class="p">(</span><span class="mi">420</span><span class="p">,</span> <span class="mi">420</span><span class="p">,</span> <span class="mi">370</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">hideturtle</span><span class="p">()</span>
+<span class="n">tracer</span><span class="p">(</span><span class="bp">False</span><span class="p">)</span>
+<span class="n">grid</span><span class="p">()</span>
+<span class="n">onscreenclick</span><span class="p">(</span><span class="n">start</span><span class="p">)</span>
+<span class="n">done</span><span class="p">()</span>
+
+</pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+</div>
+</body>

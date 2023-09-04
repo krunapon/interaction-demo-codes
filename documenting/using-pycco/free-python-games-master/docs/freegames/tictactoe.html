@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <title>tictactoe.py</title>
+  <link rel="stylesheet" href="../pycco.css">
+</head>
+<body>
+<div id='container'>
+  <div id="background"></div>
+  <div class='section'>
+    <div class='docs'><h1>tictactoe.py</h1></div>
+  </div>
+  <div class='clearall'>
+  <div class='section' id='section-0'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-0'>#</a>
+      </div>
+      <p>Tic Tac Toe</p>
+<p>Exercises</p>
+<ol>
+<li>Give the X and O a different color and width.</li>
+<li>What happens when someone taps a taken spot?</li>
+<li>How would you detect when someone has won?</li>
+<li>How could you create a computer player?</li>
+</ol>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">turtle</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">freegames</span> <span class="kn">import</span> <span class="n">line</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-1'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-1'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre><span class="k">def</span> <span class="nf">grid</span><span class="p">():</span>
+    <span class="s2">&quot;Draw tic-tac-toe grid.&quot;</span>
+    <span class="n">line</span><span class="p">(</span><span class="o">-</span><span class="mi">67</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="o">-</span><span class="mi">67</span><span class="p">,</span> <span class="o">-</span><span class="mi">200</span><span class="p">)</span>
+    <span class="n">line</span><span class="p">(</span><span class="mi">67</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">67</span><span class="p">,</span> <span class="o">-</span><span class="mi">200</span><span class="p">)</span>
+    <span class="n">line</span><span class="p">(</span><span class="o">-</span><span class="mi">200</span><span class="p">,</span> <span class="o">-</span><span class="mi">67</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="o">-</span><span class="mi">67</span><span class="p">)</span>
+    <span class="n">line</span><span class="p">(</span><span class="o">-</span><span class="mi">200</span><span class="p">,</span> <span class="mi">67</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">67</span><span class="p">)</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-2'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-2'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre><span class="k">def</span> <span class="nf">drawx</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="s2">&quot;Draw X player.&quot;</span>
+    <span class="n">line</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">133</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="mi">133</span><span class="p">)</span>
+    <span class="n">line</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="mi">133</span><span class="p">,</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">133</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-3'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-3'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre><span class="k">def</span> <span class="nf">drawo</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="s2">&quot;Draw O player.&quot;</span>
+    <span class="n">up</span><span class="p">()</span>
+    <span class="n">goto</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="mi">67</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="mi">5</span><span class="p">)</span>
+    <span class="n">down</span><span class="p">()</span>
+    <span class="n">circle</span><span class="p">(</span><span class="mi">62</span><span class="p">)</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-4'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-4'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre><span class="k">def</span> <span class="nf">floor</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+    <span class="s2">&quot;Round value down to grid with square size 133.&quot;</span>
+    <span class="k">return</span> <span class="p">((</span><span class="n">value</span> <span class="o">+</span> <span class="mi">200</span><span class="p">)</span> <span class="o">//</span> <span class="mi">133</span><span class="p">)</span> <span class="o">*</span> <span class="mi">133</span> <span class="o">-</span> <span class="mi">200</span>
+
+<span class="n">state</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;player&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span>
+<span class="n">players</span> <span class="o">=</span> <span class="p">[</span><span class="n">drawx</span><span class="p">,</span> <span class="n">drawo</span><span class="p">]</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-5'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-5'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre><span class="k">def</span> <span class="nf">tap</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="s2">&quot;Draw X or O in tapped square.&quot;</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">floor</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">floor</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+    <span class="n">player</span> <span class="o">=</span> <span class="n">state</span><span class="p">[</span><span class="s1">&#39;player&#39;</span><span class="p">]</span>
+    <span class="n">draw</span> <span class="o">=</span> <span class="n">players</span><span class="p">[</span><span class="n">player</span><span class="p">]</span>
+    <span class="n">draw</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+    <span class="n">update</span><span class="p">()</span>
+    <span class="n">state</span><span class="p">[</span><span class="s1">&#39;player&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="ow">not</span> <span class="n">player</span>
+
+<span class="n">setup</span><span class="p">(</span><span class="mi">420</span><span class="p">,</span> <span class="mi">420</span><span class="p">,</span> <span class="mi">370</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">hideturtle</span><span class="p">()</span>
+<span class="n">tracer</span><span class="p">(</span><span class="bp">False</span><span class="p">)</span>
+<span class="n">grid</span><span class="p">()</span>
+<span class="n">update</span><span class="p">()</span>
+<span class="n">onscreenclick</span><span class="p">(</span><span class="n">tap</span><span class="p">)</span>
+<span class="n">done</span><span class="p">()</span>
+
+</pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+</div>
+</body>

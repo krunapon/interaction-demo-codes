@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <title>tron.py</title>
+  <link rel="stylesheet" href="pycco.css">
+</head>
+<body>
+<div id='container'>
+  <div id="background"></div>
+  <div class='section'>
+    <div class='docs'><h1>tron.py</h1></div>
+  </div>
+  <div class='clearall'>
+  <div class='section' id='section-0'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-0'>#</a>
+      </div>
+      <p>Tron, classic arcade game.</p>
+<p>Exercises</p>
+<ol>
+<li>Make the tron players faster/slower.</li>
+<li>Stop a tron player from running into itself.</li>
+<li>Allow the tron player to go around the edge of the screen.</li>
+<li>How would you create a computer player?</li>
+</ol>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">turtle</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">freegames</span> <span class="kn">import</span> <span class="n">square</span><span class="p">,</span> <span class="n">vector</span>
+
+<span class="n">p1xy</span> <span class="o">=</span> <span class="n">vector</span><span class="p">(</span><span class="o">-</span><span class="mi">100</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">p1aim</span> <span class="o">=</span> <span class="n">vector</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">p1body</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+
+<span class="n">p2xy</span> <span class="o">=</span> <span class="n">vector</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">p2aim</span> <span class="o">=</span> <span class="n">vector</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">p2body</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-1'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-1'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre><span class="k">def</span> <span class="nf">inside</span><span class="p">(</span><span class="n">head</span><span class="p">):</span>
+    <span class="s2">&quot;Return True if head inside screen.&quot;</span>
+    <span class="k">return</span> <span class="o">-</span><span class="mi">200</span> <span class="o">&lt;</span> <span class="n">head</span><span class="o">.</span><span class="n">x</span> <span class="o">&lt;</span> <span class="mi">200</span> <span class="ow">and</span> <span class="o">-</span><span class="mi">200</span> <span class="o">&lt;</span> <span class="n">head</span><span class="o">.</span><span class="n">y</span> <span class="o">&lt;</span> <span class="mi">200</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-2'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-2'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre><span class="k">def</span> <span class="nf">draw</span><span class="p">():</span>
+    <span class="s2">&quot;Advance players and draw game.&quot;</span>
+    <span class="n">p1xy</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">p1aim</span><span class="p">)</span>
+    <span class="n">p1head</span> <span class="o">=</span> <span class="n">p1xy</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+    <span class="n">p2xy</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">p2aim</span><span class="p">)</span>
+    <span class="n">p2head</span> <span class="o">=</span> <span class="n">p2xy</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">inside</span><span class="p">(</span><span class="n">p1head</span><span class="p">)</span> <span class="ow">or</span> <span class="n">p1head</span> <span class="ow">in</span> <span class="n">p2body</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Player blue wins!&#39;</span><span class="p">)</span>
+        <span class="k">return</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">inside</span><span class="p">(</span><span class="n">p2head</span><span class="p">)</span> <span class="ow">or</span> <span class="n">p2head</span> <span class="ow">in</span> <span class="n">p1body</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Player red wins!&#39;</span><span class="p">)</span>
+        <span class="k">return</span>
+
+    <span class="n">p1body</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">p1head</span><span class="p">)</span>
+    <span class="n">p2body</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">p2head</span><span class="p">)</span>
+
+    <span class="n">square</span><span class="p">(</span><span class="n">p1xy</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">p1xy</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;red&#39;</span><span class="p">)</span>
+    <span class="n">square</span><span class="p">(</span><span class="n">p2xy</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">p2xy</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;blue&#39;</span><span class="p">)</span>
+    <span class="n">update</span><span class="p">()</span>
+    <span class="n">ontimer</span><span class="p">(</span><span class="n">draw</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+
+<span class="n">setup</span><span class="p">(</span><span class="mi">420</span><span class="p">,</span> <span class="mi">420</span><span class="p">,</span> <span class="mi">370</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">hideturtle</span><span class="p">()</span>
+<span class="n">tracer</span><span class="p">(</span><span class="bp">False</span><span class="p">)</span>
+<span class="n">listen</span><span class="p">()</span>
+<span class="n">onkey</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">p1aim</span><span class="o">.</span><span class="n">rotate</span><span class="p">(</span><span class="mi">90</span><span class="p">),</span> <span class="s1">&#39;a&#39;</span><span class="p">)</span>
+<span class="n">onkey</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">p1aim</span><span class="o">.</span><span class="n">rotate</span><span class="p">(</span><span class="o">-</span><span class="mi">90</span><span class="p">),</span> <span class="s1">&#39;d&#39;</span><span class="p">)</span>
+<span class="n">onkey</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">p2aim</span><span class="o">.</span><span class="n">rotate</span><span class="p">(</span><span class="mi">90</span><span class="p">),</span> <span class="s1">&#39;j&#39;</span><span class="p">)</span>
+<span class="n">onkey</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">p2aim</span><span class="o">.</span><span class="n">rotate</span><span class="p">(</span><span class="o">-</span><span class="mi">90</span><span class="p">),</span> <span class="s1">&#39;l&#39;</span><span class="p">)</span>
+<span class="n">draw</span><span class="p">()</span>
+<span class="n">done</span><span class="p">()</span>
+
+</pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+</div>
+</body>

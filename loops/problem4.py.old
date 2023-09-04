@@ -1,0 +1,3 @@
+# Write a program which sums the integers
+# from 1 to 10 without using a for loop
+print("Total is %d" % sum(range(1,11)))

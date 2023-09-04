@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <title>snake.py</title>
+  <link rel="stylesheet" href="../pycco.css">
+</head>
+<body>
+<div id='container'>
+  <div id="background"></div>
+  <div class='section'>
+    <div class='docs'><h1>snake.py</h1></div>
+  </div>
+  <div class='clearall'>
+  <div class='section' id='section-0'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-0'>#</a>
+      </div>
+      <p>Snake, classic arcade game.</p>
+<p>Excercises</p>
+<ol>
+<li>How do you make the snake faster or slower?</li>
+<li>How can you make the snake go around the edges?</li>
+<li>How would you move the food?</li>
+<li>Change the snake to respond to arrow keys.</li>
+</ol>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">turtle</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">randrange</span>
+<span class="kn">from</span> <span class="nn">freegames</span> <span class="kn">import</span> <span class="n">square</span><span class="p">,</span> <span class="n">vector</span>
+
+<span class="n">food</span> <span class="o">=</span> <span class="n">vector</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">snake</span> <span class="o">=</span> <span class="p">[</span><span class="n">vector</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">)]</span>
+<span class="n">aim</span> <span class="o">=</span> <span class="n">vector</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">10</span><span class="p">)</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-1'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-1'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre><span class="k">def</span> <span class="nf">change</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="s2">&quot;Change snake direction.&quot;</span>
+    <span class="n">aim</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span>
+    <span class="n">aim</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">y</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-2'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-2'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre><span class="k">def</span> <span class="nf">inside</span><span class="p">(</span><span class="n">head</span><span class="p">):</span>
+    <span class="s2">&quot;Return True if head inside boundaries.&quot;</span>
+    <span class="k">return</span> <span class="o">-</span><span class="mi">200</span> <span class="o">&lt;</span> <span class="n">head</span><span class="o">.</span><span class="n">x</span> <span class="o">&lt;</span> <span class="mi">190</span> <span class="ow">and</span> <span class="o">-</span><span class="mi">200</span> <span class="o">&lt;</span> <span class="n">head</span><span class="o">.</span><span class="n">y</span> <span class="o">&lt;</span> <span class="mi">190</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-3'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-3'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre><span class="k">def</span> <span class="nf">move</span><span class="p">():</span>
+    <span class="s2">&quot;Move snake forward one segment.&quot;</span>
+    <span class="n">head</span> <span class="o">=</span> <span class="n">snake</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">head</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">aim</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">inside</span><span class="p">(</span><span class="n">head</span><span class="p">)</span> <span class="ow">or</span> <span class="n">head</span> <span class="ow">in</span> <span class="n">snake</span><span class="p">:</span>
+        <span class="n">square</span><span class="p">(</span><span class="n">head</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">head</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="s1">&#39;red&#39;</span><span class="p">)</span>
+        <span class="n">update</span><span class="p">()</span>
+        <span class="k">return</span>
+
+    <span class="n">snake</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">head</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">head</span> <span class="o">==</span> <span class="n">food</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Snake:&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">snake</span><span class="p">))</span>
+        <span class="n">food</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">randrange</span><span class="p">(</span><span class="o">-</span><span class="mi">15</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span> <span class="o">*</span> <span class="mi">10</span>
+        <span class="n">food</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">randrange</span><span class="p">(</span><span class="o">-</span><span class="mi">15</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span> <span class="o">*</span> <span class="mi">10</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">snake</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="n">clear</span><span class="p">()</span>
+
+    <span class="k">for</span> <span class="n">body</span> <span class="ow">in</span> <span class="n">snake</span><span class="p">:</span>
+        <span class="n">square</span><span class="p">(</span><span class="n">body</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">body</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="s1">&#39;black&#39;</span><span class="p">)</span>
+
+    <span class="n">square</span><span class="p">(</span><span class="n">food</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">food</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="s1">&#39;green&#39;</span><span class="p">)</span>
+    <span class="n">update</span><span class="p">()</span>
+    <span class="n">ontimer</span><span class="p">(</span><span class="n">move</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+
+<span class="n">setup</span><span class="p">(</span><span class="mi">420</span><span class="p">,</span> <span class="mi">420</span><span class="p">,</span> <span class="mi">370</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">hideturtle</span><span class="p">()</span>
+<span class="n">tracer</span><span class="p">(</span><span class="bp">False</span><span class="p">)</span>
+<span class="n">listen</span><span class="p">()</span>
+<span class="n">onkey</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">change</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="s1">&#39;Right&#39;</span><span class="p">)</span>
+<span class="n">onkey</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">change</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="s1">&#39;Left&#39;</span><span class="p">)</span>
+<span class="n">onkey</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">change</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="s1">&#39;Up&#39;</span><span class="p">)</span>
+<span class="n">onkey</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">change</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">10</span><span class="p">),</span> <span class="s1">&#39;Down&#39;</span><span class="p">)</span>
+<span class="n">move</span><span class="p">()</span>
+<span class="n">done</span><span class="p">()</span>
+
+</pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+</div>
+</body>

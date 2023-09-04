@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <title>__init__.py</title>
+  <link rel="stylesheet" href="../pycco.css">
+</head>
+<body>
+<div id='container'>
+  <div id="background"></div>
+  <div class='section'>
+    <div class='docs'><h1>__init__.py</h1></div>
+  </div>
+  <div class='clearall'>
+  <div class='section' id='section-0'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-0'>#</a>
+      </div>
+      <p>Free Python Games</p>
+<p>Free Python Games is an Apache2 licensed collection of free Python games
+intended for education and fun. The games are written in simple Python code and
+designed for experimentation and changes. Simplified versions of several
+classic arcade games are included.</p>
+<p>Python is one of the top-five most popular programming languages in the world
+and available for free from www.python.org. Python includes an extensive
+Standard Library distributed with your installation. The Standard Library has a
+module called Turtle which is a popular way to introduce programming to
+kids. Turtle was part of the original Logo programming language developed by
+Wally Feurzig and Seymour Papert in 1966. All of the games in Free Python Games
+are implemented using Python and its Turtle module.</p>
+<p>Starting in 2012, Free Python Games began as an after school program to teach
+programming to inner-city youth. The goal was to have fun as much as it was to
+learn. Since then the games have been improved and used in a variety of
+settings ranging from classrooms to summer day-camps.</p>
+<p>The games run anywhere Python can be installed which includes desktop computers
+running Windows, Mac OS, or Linux and older or low-power hardware such as the
+Raspberry Pi. Kids across the United States in grades 6th-12th have enjoyed
+learning about topics such as encryption and projectile motion through games.</p>
+<p>Each game is entirely independent from the others and includes comments along
+with a list of exercises to work through with students. Creativity and
+flexibility is important. There is no right or wrong way to implement a new
+feature or behavior! You never know which games students will engage with best.</p>
+<p>Free Python Games supports a command-line interface (CLI). Help for the CLI is
+available using::</p>
+<p>$ python3 -m freegames &ndash;help</p>
+<p>The CLI supports three commands: list, copy, and show. For a list of all games
+run::</p>
+<p>$ python3 -m freegames list</p>
+<p>Any of the listed games may be played by executing the Python module from the
+command-line. To reference the Python module, combine &ldquo;freegames&rdquo; with the name
+of the game. For example, to play the &ldquo;snake&rdquo; game run::</p>
+<p>$ python3 -m freegames.snake</p>
+<p>Games can be modified by copying their source code. The copy command will
+create a Python file in your local directory which you can edit. For example,
+to copy and play the &ldquo;snake&rdquo; game run::</p>
+<p>$ python3 -m freegames copy snake
+  $ python3 snake.py</p>
+<p>Python includes a built-in text editor named IDLE which can also execute Python
+code. To launch the editor and make changes to the &ldquo;snake&rdquo; game run::</p>
+<p>$ python3 -m idlelib.idle snake.py</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">.utils</span> <span class="kn">import</span> <span class="n">floor</span><span class="p">,</span> <span class="n">line</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">square</span><span class="p">,</span> <span class="n">vector</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;floor&#39;</span><span class="p">,</span> <span class="s1">&#39;line&#39;</span><span class="p">,</span> <span class="s1">&#39;path&#39;</span><span class="p">,</span> <span class="s1">&#39;square&#39;</span><span class="p">,</span> <span class="s1">&#39;vector&#39;</span><span class="p">]</span>
+
+<span class="n">__title__</span> <span class="o">=</span> <span class="s1">&#39;freegames&#39;</span>
+<span class="n">__version__</span> <span class="o">=</span> <span class="s1">&#39;2.3.1&#39;</span>
+<span class="n">__build__</span> <span class="o">=</span> <span class="mh">0x020301</span>
+<span class="n">__author__</span> <span class="o">=</span> <span class="s1">&#39;Grant Jenks&#39;</span>
+<span class="n">__license__</span> <span class="o">=</span> <span class="s1">&#39;Apache 2.0&#39;</span>
+<span class="n">__copyright__</span> <span class="o">=</span> <span class="s1">&#39;2017-2019, Grant Jenks&#39;</span>
+
+</pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+</div>
+</body>

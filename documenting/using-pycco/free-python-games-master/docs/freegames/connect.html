@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <title>connect.py</title>
+  <link rel="stylesheet" href="../pycco.css">
+</head>
+<body>
+<div id='container'>
+  <div id="background"></div>
+  <div class='section'>
+    <div class='docs'><h1>connect.py</h1></div>
+  </div>
+  <div class='clearall'>
+  <div class='section' id='section-0'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-0'>#</a>
+      </div>
+      <p>Connect Four</p>
+<p>Exercises</p>
+<ol>
+<li>Change the colors.</li>
+<li>Draw squares instead of circles for open spaces.</li>
+<li>Add logic to detect a full row.</li>
+<li>Create a random computer player.</li>
+<li>How would you detect a winner?</li>
+</ol>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">turtle</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">freegames</span> <span class="kn">import</span> <span class="n">line</span>
+
+<span class="n">turns</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;red&#39;</span><span class="p">:</span> <span class="s1">&#39;yellow&#39;</span><span class="p">,</span> <span class="s1">&#39;yellow&#39;</span><span class="p">:</span> <span class="s1">&#39;red&#39;</span><span class="p">}</span>
+<span class="n">state</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;player&#39;</span><span class="p">:</span> <span class="s1">&#39;yellow&#39;</span><span class="p">,</span> <span class="s1">&#39;rows&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="mi">8</span><span class="p">}</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-1'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-1'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre><span class="k">def</span> <span class="nf">grid</span><span class="p">():</span>
+    <span class="s2">&quot;Draw Connect Four grid.&quot;</span>
+    <span class="n">bgcolor</span><span class="p">(</span><span class="s1">&#39;light blue&#39;</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="o">-</span><span class="mi">150</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">50</span><span class="p">):</span>
+        <span class="n">line</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="o">-</span><span class="mi">200</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="o">-</span><span class="mi">175</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">50</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="o">-</span><span class="mi">175</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">50</span><span class="p">):</span>
+            <span class="n">up</span><span class="p">()</span>
+            <span class="n">goto</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+            <span class="n">dot</span><span class="p">(</span><span class="mi">40</span><span class="p">,</span> <span class="s1">&#39;white&#39;</span><span class="p">)</span>
+
+    <span class="n">update</span><span class="p">()</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-2'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-2'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre><span class="k">def</span> <span class="nf">tap</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="s2">&quot;Draw red or yellow circle in tapped row.&quot;</span>
+    <span class="n">player</span> <span class="o">=</span> <span class="n">state</span><span class="p">[</span><span class="s1">&#39;player&#39;</span><span class="p">]</span>
+    <span class="n">rows</span> <span class="o">=</span> <span class="n">state</span><span class="p">[</span><span class="s1">&#39;rows&#39;</span><span class="p">]</span>
+
+    <span class="n">row</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="n">x</span> <span class="o">+</span> <span class="mi">200</span><span class="p">)</span> <span class="o">//</span> <span class="mi">50</span><span class="p">)</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="n">rows</span><span class="p">[</span><span class="n">row</span><span class="p">]</span>
+
+    <span class="n">x</span> <span class="o">=</span> <span class="p">((</span><span class="n">x</span> <span class="o">+</span> <span class="mi">200</span><span class="p">)</span> <span class="o">//</span> <span class="mi">50</span><span class="p">)</span> <span class="o">*</span> <span class="mi">50</span> <span class="o">-</span> <span class="mi">200</span> <span class="o">+</span> <span class="mi">25</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">count</span> <span class="o">*</span> <span class="mi">50</span> <span class="o">-</span> <span class="mi">200</span> <span class="o">+</span> <span class="mi">25</span>
+
+    <span class="n">up</span><span class="p">()</span>
+    <span class="n">goto</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+    <span class="n">dot</span><span class="p">(</span><span class="mi">40</span><span class="p">,</span> <span class="n">player</span><span class="p">)</span>
+    <span class="n">update</span><span class="p">()</span>
+
+    <span class="n">rows</span><span class="p">[</span><span class="n">row</span><span class="p">]</span> <span class="o">=</span> <span class="n">count</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="n">state</span><span class="p">[</span><span class="s1">&#39;player&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">turns</span><span class="p">[</span><span class="n">player</span><span class="p">]</span>
+
+<span class="n">setup</span><span class="p">(</span><span class="mi">420</span><span class="p">,</span> <span class="mi">420</span><span class="p">,</span> <span class="mi">370</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">hideturtle</span><span class="p">()</span>
+<span class="n">tracer</span><span class="p">(</span><span class="bp">False</span><span class="p">)</span>
+<span class="n">grid</span><span class="p">()</span>
+<span class="n">onscreenclick</span><span class="p">(</span><span class="n">tap</span><span class="p">)</span>
+<span class="n">done</span><span class="p">()</span>
+
+</pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+</div>
+</body>

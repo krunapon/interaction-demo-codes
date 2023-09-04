@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <title>bounce.py</title>
+  <link rel="stylesheet" href="../pycco.css">
+</head>
+<body>
+<div id='container'>
+  <div id="background"></div>
+  <div class='section'>
+    <div class='docs'><h1>bounce.py</h1></div>
+  </div>
+  <div class='clearall'>
+  <div class='section' id='section-0'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-0'>#</a>
+      </div>
+      <p>Bounce, a simple animation demo.</p>
+<p>Exercises</p>
+<ol>
+<li>Make the ball speed up and down.</li>
+<li>Change how the ball bounces when it hits a wall.</li>
+<li>Make the ball leave a trail.</li>
+<li>Change the ball color based on position.
+   Hint: colormode(255); color(0, 100, 200)</li>
+</ol>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">turtle</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">freegames</span> <span class="kn">import</span> <span class="n">vector</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-1'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-1'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre><span class="k">def</span> <span class="nf">value</span><span class="p">():</span>
+    <span class="s2">&quot;Randomly generate value between (-5, -3) or (3, 5).&quot;</span>
+    <span class="k">return</span> <span class="p">(</span><span class="mi">3</span> <span class="o">+</span> <span class="n">random</span><span class="p">()</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">choice</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+
+<span class="n">ball</span> <span class="o">=</span> <span class="n">vector</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">aim</span> <span class="o">=</span> <span class="n">vector</span><span class="p">(</span><span class="n">value</span><span class="p">(),</span> <span class="n">value</span><span class="p">())</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-2'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-2'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre><span class="k">def</span> <span class="nf">draw</span><span class="p">():</span>
+    <span class="s2">&quot;Move ball and draw game.&quot;</span>
+    <span class="n">ball</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">aim</span><span class="p">)</span>
+
+    <span class="n">x</span> <span class="o">=</span> <span class="n">ball</span><span class="o">.</span><span class="n">x</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">ball</span><span class="o">.</span><span class="n">y</span>
+
+    <span class="k">if</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="o">-</span><span class="mi">200</span> <span class="ow">or</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">200</span><span class="p">:</span>
+        <span class="n">aim</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="o">-</span><span class="n">aim</span><span class="o">.</span><span class="n">x</span>
+
+    <span class="k">if</span> <span class="n">y</span> <span class="o">&lt;</span> <span class="o">-</span><span class="mi">200</span> <span class="ow">or</span> <span class="n">y</span> <span class="o">&gt;</span> <span class="mi">200</span><span class="p">:</span>
+        <span class="n">aim</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="o">-</span><span class="n">aim</span><span class="o">.</span><span class="n">y</span>
+
+    <span class="n">clear</span><span class="p">()</span>
+    <span class="n">goto</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+    <span class="n">dot</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+
+    <span class="n">ontimer</span><span class="p">(</span><span class="n">draw</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+
+<span class="n">setup</span><span class="p">(</span><span class="mi">420</span><span class="p">,</span> <span class="mi">420</span><span class="p">,</span> <span class="mi">370</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">hideturtle</span><span class="p">()</span>
+<span class="n">tracer</span><span class="p">(</span><span class="bp">False</span><span class="p">)</span>
+<span class="n">up</span><span class="p">()</span>
+<span class="n">draw</span><span class="p">()</span>
+<span class="n">done</span><span class="p">()</span>
+
+</pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+</div>
+</body>
