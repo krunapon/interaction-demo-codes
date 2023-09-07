@@ -1,6 +1,6 @@
 import sys
 import os
-from PyQt6.QtWidgets import QApplication, QMainWindow, QLabel, QToolBar
+from PyQt6.QtWidgets import QApplication, QMainWindow, QLabel
 from PyQt6.QtCore import Qt 
 from PyQt6.QtGui import QAction, QIcon
 
@@ -22,15 +22,17 @@ class ToolbarAction(QMainWindow):
         path = os.path.dirname(__file__)
         os.chdir(path)
         self.newAction.setIcon(QIcon("images/file-new.svg"))
-        self.openAction = QAction(QIcon("images/file-open.svg"), "Open", self)
+        self.openAction = QAction(QIcon("images/file-open.svg"),
+                                  "Open", self)
   
     def _createToolBars(self):
         # File toolbar
         fileToolBar = self.addToolBar("File")
         fileToolBar.addAction(self.newAction)
         fileToolBar.addAction(self.openAction)
-        
-app = QApplication(sys.argv)
-window = ToolbarAction() 
-window.show()
-app.exec()
+
+if __name__ == "__main__":
+    app = QApplication(sys.argv)
+    window = ToolbarAction() 
+    window.show()
+    app.exec()
