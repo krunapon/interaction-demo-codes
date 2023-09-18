@@ -31,6 +31,9 @@ class MainWindow(QtWidgets.QMainWindow):
         painter.setFont(font)
 
         painter.drawText(100, 100, 'Hello, world!')
+        pen.setColor(QtGui.QColor('blue'))
+        painter.setPen(pen)
+        painter.drawText(200, 200, 100, 100, Qt.AlignmentFlag.AlignHCenter, 'Hi, World!')
         painter.end()
         self.label.setPixmap(canvas)
 
