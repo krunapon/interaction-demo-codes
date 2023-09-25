@@ -31,13 +31,7 @@ class Example(QWidget):
         self.anim.setEndValue(QRect(150, 30, 200, 200))
         self.anim.start()
 
-
-def main():
-
-    app = QApplication([])
-    ex = Example()
-    sys.exit(app.exec())
-
-
 if __name__ == "__main__":
-    main()
+    app = QApplication([])
+    Example()
+    sys.exit(app.exec())
