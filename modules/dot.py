@@ -2,9 +2,6 @@ import re
 
 str = "hello world"
 
-# Search for a sequence that starts with "he",
-# followed by two (any) characters, and an "o":
-
 x1 = re.findall("he..o", str)
 print(x1)
 

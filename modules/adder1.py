@@ -1,5 +1,4 @@
 import sys
-
 num_args = len(sys.argv)
 print(f"Number arguments is {num_args}")
 for arg in sys.argv:
