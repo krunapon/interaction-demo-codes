@@ -1,9 +1,10 @@
 import re
 
-txt = "The rain in Spain"
-x = re.search("^The.*Spain$", txt)
-print("x is {}".format(x))
-if x:
-    print("Match")
+full_txt = "The rain in Spain"
+search_pattern = "The rain"
+search_result = re.search(search_pattern, full_txt)
+print(f"The search result is ${search_result}")
+if search_result:
+    print("Search is matched")
 else:
-    print("Does not match")
+    print("Search is not matched")

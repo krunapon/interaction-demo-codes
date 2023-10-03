@@ -1,16 +1,12 @@
 import re
 
-str = "This is 59 dollars"
+str = "This is 109 Baht"
 
-#Find all digit characters:
-x1 = re.findall("\d", str)
-print(x1)
+search_result = re.search("\d{3}", str)
+print(f"search_result has match with the string {search_result.group()}")
 
-#Find anything that is not digit characters
-x2 = re.findall("\D", str)
-print(x2)
+findall_result = re.findall("\s", str)
+print(findall_result)
 
-#Find anything that is alphanumeric characters
-x3 = re.findall("\w", str)
-print(x3)
-
+split_result = re.split("\W",str)
+print(split_result)

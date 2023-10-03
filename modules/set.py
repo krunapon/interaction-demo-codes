@@ -2,15 +2,11 @@ import re
 
 str = "The rain in Spain"
 
-#Find all lower case characters alphabetically between "a" and "h":
-x1 = re.findall("[a-h]", str)
-print(x1)
+search_result = re.search("[a-h]", str)
+print(search_result)
 
-#Find only a and r
-x2 = re.findall("[ar]", str)
-print(x2)
+findall_result = re.findall('[a-h]', str)
+print(findall_result)
 
-#Find any characters that are not between "a" and "z"
-x3 = re.findall("[^a-z]",str)
-print(x3)
-
+split_result = re.split('[a-h]', str)
+print(split_result)
