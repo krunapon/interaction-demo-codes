@@ -2,17 +2,20 @@
 
 class Car:
 
-    __maxspeed = 0
+    _maxspeed = 0
     __name = ""
 
     def __init__(self):
-        self.__maxspeed = 200
+        self._maxspeed = 200
         self.__name = "Supercar"
 
     def drive(self):
-        print('driving. maxspeed ' + str(self.__maxspeed))
+        print('driving. maxspeed ' + str(self._maxspeed))
+
 
 redcar = Car()
 redcar.drive()
-redcar.__maxspeed = 10  # will not change variable because its private
+print(f' speed is {redcar._maxspeed}')
+# will not change variable because its private
+redcar._maxspeed = 10
 redcar.drive()

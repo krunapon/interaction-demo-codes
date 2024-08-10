@@ -4,7 +4,7 @@ str = "The rain in Spain falls mainly in the plain!"
 
 #Check if the string contains "ai" followed by 0 or more "x" characters:
 
-x = re.findall("aix*", str)
+x = re.findall("ai(x)*", str)
 
 print(x)
 

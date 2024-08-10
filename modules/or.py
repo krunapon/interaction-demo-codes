@@ -8,7 +8,7 @@ if (x1):
 else:
   print("No match")
 
-x2 = re.findall("Rain|Pain", str)
+x2 = re.findall("Rain|pain", str)
 if (x2):
   print("Yes, there is at least one match!")
 else:
